@@ -16,7 +16,27 @@
     <body> 
     <!--Add a nav bar here -->
     <nav>
-        <a href="/djangoapp/about">About Us</a>
+        <a href="{% url 'djangoapp:about' %}">About Us</a>
+        <ul class="navbar-right">
+            {% if user.is_authenticated %}
+            <li>
+                <a href="#">{{user.first_name}}</a>
+                <a href="{% url 'djangoapp:logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+                <form action="{% url 'djangoapp:login' %}" method="post">
+                    {% csrf_token %}
+                    <div>
+                        <input type="text" class="form-control" placeholder="Username" name="username">
+                        <input type="password" class="form-control" placeholder="Password" name="password">
+                        <button type="submit">Login</button>
+                        <a href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                    </div>
+                </form>
+            </li>
+            {% endif %}
+        </ul>
     </nav>
     <!--Add a dealer table here -->
     <h1>
@@ -29,7 +49,7 @@
     </body>
 
     <footer>
-        <a href="/djangoapp/contact">Contact Us</a>
+        <a href="{% url 'djangoapp:contact' %}">Contact Us</a>
     
     </footer>
 
