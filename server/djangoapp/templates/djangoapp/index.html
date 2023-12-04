@@ -16,6 +16,7 @@
     <body> 
     <!--Add a nav bar here -->
     <nav>
+        <p>Dealership Review</p>
         <a href="{% url 'djangoapp:about' %}">About Us</a>
         <ul class="navbar-right">
             {% if user.is_authenticated %}
@@ -39,13 +40,26 @@
         </ul>
     </nav>
     <!--Add a dealer table here -->
-    <h1>
-        This is a Dealer Table
-    </h1>
-    <p>
-        This is a sample paragraph
-    </p>
-    
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Dealer Name</td>
+            <td>City</td>
+            <td>Address</td>
+            <td>Zip</td>
+            <td>State</td>
+        </tr>
+        {% for cardealer in dealerships %}
+        <tr>
+            <td>{{cardealer.id}}</td>
+            <td>{{cardealer.full_name}}</td>
+            <td>{{cardealer.city}}</td>
+            <td>{{cardealer.address}}</td>
+            <td>{{cardealer.zip}}</td>
+            <td>{{cardealer.st}}</td>
+        </tr>
+        {% endfor %}
+    </table>
     </body>
 
     <footer>
