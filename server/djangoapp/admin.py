@@ -5,7 +5,7 @@ import django
 django.setup()
 
 from django.contrib import admin
-from models import CarModel, CarMake
+from .models import CarModel, CarMake
 # from .models import related models
 
 
