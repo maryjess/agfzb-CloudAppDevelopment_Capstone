@@ -1,8 +1,8 @@
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "../djangobackend/settings")
 
 import django
 django.setup()
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangobackend.settings')
 
 from django.contrib import admin
 from .models import CarModel, CarMake

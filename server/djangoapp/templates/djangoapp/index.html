@@ -40,25 +40,29 @@
         </ul>
     </nav>
     <!--Add a dealer table here -->
-    <table>
-        <tr>
-            <td>ID</td>
-            <td>Dealer Name</td>
-            <td>City</td>
-            <td>Address</td>
-            <td>Zip</td>
-            <td>State</td>
-        </tr>
-        {% for cardealer in dealerships %}
-        <tr>
-            <td>{{cardealer.id}}</td>
-            <td>{{cardealer.full_name}}</td>
-            <td>{{cardealer.city}}</td>
-            <td>{{cardealer.address}}</td>
-            <td>{{cardealer.zip}}</td>
-            <td>{{cardealer.st}}</td>
-        </tr>
-        {% endfor %}
+    <table class="table" id="table" data-filter-control="true">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Dealer Name</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Zip</th>
+                <th data-field="state" data-filter-control="select">State</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cardealer in dealerships %}
+            <tr>
+                <td>{{cardealer.id}}</td>
+                <td><a href="{% url 'djangoapp:dealer_details' cardealer.id %}">{{cardealer.full_name}}</a></td>
+                <td>{{cardealer.city}}</td>
+                <td>{{cardealer.address}}</td>
+                <td>{{cardealer.zip}}</td>
+                <td>{{cardealer.st}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
     </body>
 
@@ -66,5 +70,11 @@
         <a href="{% url 'djangoapp:contact' %}">Contact Us</a>
     
     </footer>
+
+    <script>
+        $(function() {
+          $('#table').bootstrapTable()
+        })
+    </script>
 
 </html>

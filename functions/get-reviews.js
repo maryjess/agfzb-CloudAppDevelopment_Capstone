@@ -27,9 +27,9 @@ app.get('/reviews/get', (req, res) => {
     const { state, id } = req.query;
     // Create a selector object based on query parameters
     const selector = {};
-    // if (state) {
-    //     selector.state = state;
-    // }
+    if (state) {
+        selector.state = state;
+    }
     
     if (id) {
         selector.id = parseInt(id); // Filter by "id" with a value of 1
