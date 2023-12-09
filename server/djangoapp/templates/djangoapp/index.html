@@ -13,13 +13,68 @@
 
 </head>
 
-    <body>
-    <!-- Remove this line the first time you edit this file -->
-     This is the index page of your Django app!
+    <body> 
     <!--Add a nav bar here -->
-
+    <nav>
+        <p>Dealership Review</p>
+        <a href="{% url 'djangoapp:about' %}">About Us</a>
+        <ul class="navbar-right">
+            {% if user.is_authenticated %}
+            <li>
+                <a href="#">{{user.first_name}}</a>
+                <a href="{% url 'djangoapp:logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+                <form action="{% url 'djangoapp:login' %}" method="post">
+                    {% csrf_token %}
+                    <div>
+                        <input type="text" class="form-control" placeholder="Username" name="username">
+                        <input type="password" class="form-control" placeholder="Password" name="password">
+                        <button type="submit">Login</button>
+                        <a href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                    </div>
+                </form>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
     <!--Add a dealer table here -->
-
+    <table class="table" id="table" data-filter-control="true">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Dealer Name</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Zip</th>
+                <th data-field="state" data-filter-control="select">State</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cardealer in dealerships %}
+            <tr>
+                <td>{{cardealer.id}}</td>
+                <td><a href="{% url 'djangoapp:dealer_details' cardealer.id %}">{{cardealer.full_name}}</a></td>
+                <td>{{cardealer.city}}</td>
+                <td>{{cardealer.address}}</td>
+                <td>{{cardealer.zip}}</td>
+                <td>{{cardealer.st}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     </body>
+
+    <footer>
+        <a href="{% url 'djangoapp:contact' %}">Contact Us</a>
+    
+    </footer>
+
+    <script>
+        $(function() {
+          $('#table').bootstrapTable()
+        })
+    </script>
 
 </html>
