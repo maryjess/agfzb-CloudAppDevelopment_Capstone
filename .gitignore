@@ -140,3 +140,11 @@ server/djangoapp/migrations/
 *.pyc
 server/djangoapp/migrations/
 
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+staticfiles
+
